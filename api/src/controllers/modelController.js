@@ -1,6 +1,7 @@
-const {Recipe} = require("../db");
+const {Recipe, Diet} = require("../db");
 const {v4: uuidv4} = require("uuid");
  const {Op} = require("sequelize");
+
 
 
 class ModelController {
@@ -34,19 +35,19 @@ class ModelController {
             .catch(error => next(error))
     };
     postElement = async (req, res) => {
-        const body = req.body;
+        let {title,readyInMinutes,servings,image,summary,diets,healthScore,analyzedInstructions} = req.body;
         //console.log("BODY----->", JSON.stringify({name}))
-        //if (!title || !summary || !healthScore || !analyzedInstructions) return res.status(404).send("Falta enviar datos obligatorios");
-
+        if (!title || !readyInMinutes || !servings || !diets || !image || !summary || !healthScore || !analyzedInstructions) return res.status(404).send("Falta enviar datos obligatorios");
+        title = title.toLowerCase();
+        let body = {title,readyInMinutes,servings,image,summary,diets,healthScore,analyzedInstructions};
         try {
-            let newElement;
-            if(this.model===Recipe){
-                 newElement = await this.model.create({...body, id: uuidv4()})
-            }else{
-                 newElement = await this.model.create(body);
-            }
-            // newElement = await this.model.create({name});
-            //console.log(body.toJSON());
+
+            let newElement = await this.model.create({...body, id: uuidv4()});
+            console.log(diets);
+            diets.map(async d=>{
+                let diet = await Diet.findOne({ where : {name : d } });
+                newElement.addDiet(diet.id);
+            })
             res.status(201).send(newElement);
         } catch (e) {
             res.status(404).send("Error en alguno de los datos provistos")

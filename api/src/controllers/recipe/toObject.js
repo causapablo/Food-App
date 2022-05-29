@@ -9,7 +9,11 @@ const toObject = (data) => {
                 servings: item.servings,
                 image: item.image,
                 summary: item.summary.replace(/<[^>]+>/g, ""),
-                diets: item.diets,
+                diets: item.diets.map(d=>{
+                    return {
+                        name: d
+                    }
+                }),
                 healthScore: item.healthScore,
                 analyzedInstructions: item.analyzedInstructions[0]?.steps.map(s => s.step).join(" "),
                 db : false
@@ -25,7 +29,11 @@ const toObject = (data) => {
             servings,
             image,
             summary : summary.replace(/<[^>]+>/g, ""),
-            diets,
+            diets: diets.map(d=>{
+                return {
+                    name: d
+                }
+            }),
             healthScore,
             analyzedInstructions: analyzedInstructions[0]?.steps.map(s => s.step).join(" "),
             db: false

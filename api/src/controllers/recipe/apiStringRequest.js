@@ -1,10 +1,10 @@
 require('dotenv').config();
-const {API_KEY } = process.env;
+
 function apiGetTitle(title,API_KEY){
     return `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&query=${title}&number=5&addRecipeInformation=true`;
 }
 function apiGetAll(API_KEY){
-    return `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=95&addRecipeInformation=true`;
+    return `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=5&addRecipeInformation=true`;
 }
 function apiGetById(id,API_KEY){
     return `https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}&includeNutrition=false`

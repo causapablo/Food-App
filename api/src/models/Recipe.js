@@ -14,19 +14,24 @@ module.exports = (sequelize) => {
             title: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                unique: true
-            },
+                unique: true,
+                get(){
+                    const firstCapital = this.getDataValue('title');
+                    return firstCapital.charAt(0).toUpperCase() + firstCapital.slice(1);
+                }
+            }
+            ,
             readyInMinutes : {
                 type : DataTypes.INTEGER,
-                allowNull: false
+                allowNull: true
             },
             servings : {
                 type : DataTypes.INTEGER,
-                allowNull: false
+                allowNull: true
             },
             image: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: true
             },
             summary: {
                 type: DataTypes.TEXT,
