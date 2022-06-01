@@ -43,7 +43,7 @@ class ModelController {
         try {
 
             let newElement = await this.model.create({...body, id: uuidv4()});
-            console.log(diets);
+            console.log(diets);//diets = ['vegetarian','paleo']
             diets.map(async d=>{
                 let diet = await Diet.findOne({ where : {name : d } });
                 newElement.addDiet(diet.id);
@@ -55,3 +55,4 @@ class ModelController {
     };
 }
 module.exports = ModelController;
+

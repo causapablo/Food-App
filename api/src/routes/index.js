@@ -14,7 +14,7 @@ const router = Router();
 
 router.get('/recipes',recipeController.getElements);
 router.get('/recipes/:id',recipeController.getElementById);
-router.get('/diet',typeController.getElements);
+router.get('/diets',typeController.getElements);
 router.post('/recipes', recipeController.postElement);
 // router.post('/recipes/:idRecipe/diet/:idDiet',recipeController.addDietToRecipe);
 module.exports = router;

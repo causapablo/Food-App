@@ -1,6 +1,6 @@
-const axios = require('axios');
+// const axios = require('axios');
 const {Diet} = require("../../db");
-const toObject = require('../recipe/toObject');
+// const toObject = require('../recipe/toObject');
 let postDiets = async (endPointGet) => {
     // let diets = [];
     // let recipes = await axios.get(endPointGet);//Esto devuelve un arreglo de objetos.
@@ -24,13 +24,14 @@ let postDiets = async (endPointGet) => {
         'vegan',
         'whole 30'
     ]
-    console.log(diets);
+
     try {
         diets.forEach(d => {
             if (d) {
                 Diet.create({name: d});
             }
         });
+        console.log("Diets loaded");
     } catch (e) {
         console.log(e)
     }
