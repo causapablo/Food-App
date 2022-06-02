@@ -80,7 +80,7 @@ export const getRecipeDetail = (id) => {
 
     return async (dispatch) => {
         try {
-            let recipe = await axios.get(`http://localhost:3001/recipes${id}`);
+            let recipe = await axios.get(`http://localhost:3001/recipes/${id}`);
             return dispatch({type: GET_RECIPE_DETAIL, payload: recipe.data})
         } catch (e) {
             console.log(e);

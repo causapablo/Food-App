@@ -7,6 +7,7 @@ import {
     ORDER_BY_NAME,
     ORDER_BY_SCORE, SEARCH_BY_TITLE
 } from '../actions/actionsCreators';
+import recipeDetail from "../../components/RecipeDetail/RecipeDetail";
 const initialState = {
     recipes : [],
     recipesCopy : [],

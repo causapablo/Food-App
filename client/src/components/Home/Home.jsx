@@ -14,6 +14,7 @@ import OrderByName from "../Filters/OrderByName";
 import OrderByScore from "../Filters/OrderByScore";
 import FilterByDiet from "../Filters/FilterByDiet";
 
+
 function Home() {
     const dispatch = useDispatch();
     const recipes = useSelector(state=> state.recipes);
@@ -30,6 +31,7 @@ function Home() {
     useEffect(()=>{
         dispatch(getAllRecipes());
         dispatch(getAllDiets());
+        console.log(recipes);
     },[dispatch]);
 
     const paginate = (number) => {
