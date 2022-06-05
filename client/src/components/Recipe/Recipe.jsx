@@ -14,7 +14,7 @@ const RecipeCard = (props)=>{
                     return <li key={index}>{diet.name}</li>
                 })
             }</ul>
-            <Link to={`/recipe/${props.id}`} >Details of Recipe</Link>
+            <Link to={`/recipe/${props.id}`}>Details of Recipe</Link>
         </div>
     )
 }

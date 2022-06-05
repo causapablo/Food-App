@@ -13,13 +13,14 @@ import SearchBar from "../SearchBar/SearchBar";
 import OrderByName from "../Filters/OrderByName";
 import OrderByScore from "../Filters/OrderByScore";
 import FilterByDiet from "../Filters/FilterByDiet";
-
+import {Link} from "react-router-dom";
 
 function Home() {
     const dispatch = useDispatch();
     const recipes = useSelector(state=> state.recipes);
     const diets = useSelector(state=>state.diets);
-    const [tomas, setTomas] = useState(true)
+    const loading = useSelector(state=>state.loading);
+    const [ordered, setOrdered] = useState(true)
 
     const [currentPage, setCurrentPage] = useState(1);    // pagina que ira cambiando
     const [recipesPerPage, setRecipesPerPage] = useState(9); // self-explanatory
@@ -30,8 +31,8 @@ function Home() {
 
     useEffect(()=>{
         dispatch(getAllRecipes());
-        dispatch(getAllDiets());
-        console.log(recipes);
+        dispatch(getAllDiets());//Aca le va a decir al reducer que cargue las dietas en el store, así podemos traerlas como opciones.
+
     },[dispatch]);
 
     const paginate = (number) => {
@@ -44,11 +45,11 @@ function Home() {
     function handleOrderByName(e) {
         dispatch(orderByName(e.target.value));
 
-        tomas ? setTomas(false) : setTomas(true);
+        ordered ? setOrdered(false) : setOrdered(true);
     };
     function handleOrderByScore(e) {
         dispatch(orderByScore(e.target.value))
-        tomas ? setTomas(false) : setTomas(true)
+        ordered ? setOrdered(false) : setOrdered(true)
     };
     function returnToFirstPage() {
         setCurrentPage(1)
@@ -57,19 +58,14 @@ function Home() {
 
     return (
         <div>
-            {/*{*/}
-            {/*    recipes.map((recipe,index)=>(*/}
-            {/*        <RecipeCard key = {index} id = {recipe.id}  image = {recipe.image} title = {recipe.title}*/}
-            {/*        healthScore = {recipe.healthScore} diets = {recipe.diets}*/}
-            {/*        />*/}
-            {/*    ))*/}
-            {/*}*/}
-            <div>
-                <SearchBar returnToFirstPage={returnToFirstPage} />
-                <OrderByName handleOrderByName={handleOrderByName}/>
-                <OrderByScore handleOrderByScore={handleOrderByScore}/>
-                <FilterByDiet handleFilterByDiets={handleFilterByDiets} diets={diets}/>
 
+            <div>
+
+                <OrderByName handleOrderByName={handleOrderByName}/>
+                <FilterByDiet handleFilterByDiets={handleFilterByDiets} diets={diets}/>
+                <OrderByScore handleOrderByScore={handleOrderByScore}/>
+                <Link to = {'/create'}>Create Recipe</Link>
+                <SearchBar returnToFirstPage={returnToFirstPage} />
             </div>
             <div>
                 <Paginate
@@ -80,7 +76,7 @@ function Home() {
                 />
                 <div>
                     {
-                        currentRecipes && currentRecipes.map((recipe,index) => {
+                         loading ? 'Loading' : currentRecipes.map((recipe,index) => {
                             return (
                                 <RecipeCard key = {index} id = {recipe.id}  image = {recipe.image} title = {recipe.title}
                                             healthScore = {recipe.healthScore} diets = {recipe.diets}
