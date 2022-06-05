@@ -8,12 +8,15 @@ export const ORDER_BY_SCORE = "ORDER_BY_SCORE";
 export const SEARCH_BY_TITLE = "SEARCH_BY_TITLE";
 export const CREATE_RECIPE = "CREATE_RECIPE";
 export const GET_RECIPE_DETAIL = "GET_RECIPE_DETAIL";
+export const LOADING = "LOADING";
+export const RESET_DETAIL = "RESET_DETAIL";
 
 
 export const getAllRecipes = () => {
 
     return async (dispatch) => {
         try {
+            dispatch(loading());
             let recipes = await axios('http://localhost:3001/recipes');
             return dispatch({
                 type: GET_ALL_RECIPES,
@@ -27,6 +30,7 @@ export const getAllRecipes = () => {
 export const getAllDiets = () => {
     return async (dispatch) => {
         try {
+
             let diets = await axios('http://localhost:3001/diets');
             return dispatch({
                 type: GET_ALL_DIETS,
@@ -43,6 +47,12 @@ export const filterByDiets = (diet) => {
         diet
     }
 };
+export const loading = (value)=>{
+    return{
+        type : LOADING,
+        payload : value
+    }
+}
 export const orderByName = (payload) => {
     return {
         type: ORDER_BY_NAME,
@@ -79,7 +89,9 @@ export const createRecipe = (recipe) => {
 export const getRecipeDetail = (id) => {
 
     return async (dispatch) => {
+
         try {
+            dispatch(loading());
             let recipe = await axios.get(`http://localhost:3001/recipes/${id}`);
             return dispatch({type: GET_RECIPE_DETAIL, payload: recipe.data})
         } catch (e) {
@@ -87,4 +99,9 @@ export const getRecipeDetail = (id) => {
         }
     }
 
+};
+export function resetDetail() {
+    return {
+        type: RESET_DETAIL,
+    };
 }

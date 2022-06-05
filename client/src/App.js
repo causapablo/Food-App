@@ -1,20 +1,20 @@
 import './App.css';
 import {Route} from "react-router-dom";
-import Nav from "./components/NavBar/Nav";
+
 import Home from "./components/Home/Home";
-import RecipeDetail from "./components/RecipeDetail/RecipeDetail";
-import CreateRecipe from "./components/CreateRecipe/CreateRecipe";
+import {RecipeDetail} from "./components/RecipeDetail/RecipeDetail";
+import {CreateRecipe} from "./components/CreateRecipe/CreateRecipe";
+import {LandingPage} from "./components/LandingPage/LandingPage";
+import {ErrorPage} from "./components/ErrorPage/ErrorPage";
 
 function App() {
     return (
        <main>
-
-           <Nav/>
-           <Route exact path={'/home'} component={Home}/>
-           <Route exact path={'/create'} component={CreateRecipe}/>
+           <Route exact path={'/'} component={LandingPage}/>
+           <Route exact path={'/recipes'} component={Home}/>
            <Route exact path={'/recipe/:id'} component={RecipeDetail}/>
-
-
+           <Route exact path={'/create'} component={CreateRecipe}/>
+           <Route exact path={"/error"} component={ErrorPage}/>
        </main>
     );
 }

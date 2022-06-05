@@ -35,11 +35,12 @@ class ModelController {
             .catch(error => next(error))
     };
     postElement = async (req, res) => {
-        let {title,readyInMinutes,servings,image,summary,diets,healthScore,analyzedInstructions} = req.body;
+        let {title,image,summary,diets,healthScore,analyzedInstructions} = req.body;
         //console.log("BODY----->", JSON.stringify({name}))
-        if (!title || !readyInMinutes || !servings || !diets || !image || !summary || !healthScore || !analyzedInstructions) return res.status(404).send("Falta enviar datos obligatorios");
+        if (!title || !diets || !image || !summary || !healthScore || !analyzedInstructions) return res.status(404).send("Falta enviar datos obligatorios");
         title = title.toLowerCase();
-        let body = {title,readyInMinutes,servings,image,summary,diets,healthScore,analyzedInstructions};
+        let body = {title,image,summary,diets,healthScore,analyzedInstructions};
+        console.log(body);
         try {
 
             let newElement = await this.model.create({...body, id: uuidv4()});
@@ -50,7 +51,7 @@ class ModelController {
             })
             res.status(201).send(newElement);
         } catch (e) {
-            res.status(404).send("Error en alguno de los datos provistos")
+            res.status(400).send("Error en alguno de los datos provistos")
         }
     };
 }
