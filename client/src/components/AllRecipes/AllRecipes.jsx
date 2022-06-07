@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
     getAllRecipes,
     getAllDiets,
-    resetDetail, filterByDiets
+    filterByDiets, resetDetail
 } from "../../redux/actions/actionsCreators";
 import { Loading } from "../Loading/Loading";
 import "./AllRecipes.css";
@@ -18,10 +18,10 @@ export function AllRecipes() {
     let errorRender = useSelector((state) => state.errorRender);
     let cache = useSelector(state=>state.cacheFiltrado);
 
-    const [counterRecipes, setCounterRecipes] = useState(1);
+    const [counterPage, setCounterPage] = useState(1);
     const [recipesPerPage ] = useState(9);
 
-    const lastRecipe = counterRecipes * recipesPerPage; // 1 * 12 = 12
+    const lastRecipe = counterPage * recipesPerPage; // 1 * 9 = 9
     const firstRecipe = lastRecipe - recipesPerPage; // 12 - 12 = 0
     //Indicador:
     const indexPages = Math.ceil(allRecipes.length / recipesPerPage);
@@ -32,26 +32,26 @@ export function AllRecipes() {
 
 
     const back = () => {
-        if (counterRecipes !== 1) {
-            setCounterRecipes(counterRecipes - 1);
+        if (counterPage !== 1) {
+            setCounterPage(counterPage - 1);
         }
     };
 
     const next = () => {
-        if (counterRecipes !== indexPages) {
-            setCounterRecipes(counterRecipes + 1);
+        if (counterPage !== indexPages) {
+            setCounterPage(counterPage + 1);
         }
     };
 
     const begin = () => {
-        setCounterRecipes(1);
+        setCounterPage(1);
     };
 
     const end = () => {
-        setCounterRecipes(indexPages);
+        setCounterPage(indexPages);
     };
 
-    if (counterRecipes > indexPages) {
+    if (counterPage > indexPages) {
         back();
     }
 
@@ -61,9 +61,9 @@ export function AllRecipes() {
         }else{
             dispatch(filterByDiets(cache))
         }
-
+        dispatch(resetDetail())
         dispatch(getAllDiets());
-    }, [dispatch]);
+    }, [cache, dispatch]);
 
     if (errorRender.length === 0) {
         return (
@@ -82,7 +82,7 @@ export function AllRecipes() {
                         Previous
                     </button>
                     <p>
-                        {counterRecipes} de {indexPages}
+                        {counterPage} de {indexPages}
                     </p>
                     <button onClick={next} className="pagination-button p">
                         Next

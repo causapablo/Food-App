@@ -51,7 +51,7 @@ export function CreateRecipe() {
 
     function handleDietsChange(e) { // agregar diets
         if(input.diets.includes(e.target.value)){
-            return 'Diet Type exists'
+            return alert('Diet Type exists')
         }else{
             setInput({
                 ...input,
@@ -64,7 +64,7 @@ export function CreateRecipe() {
         }))
     };
 
-    function handleSubmit(e) {
+    let handleSubmit = (e)=> {
         e.preventDefault();
         try {
             let findRecipe = allRecipes.filter((r) => r.title.toLowerCase() === input.title.toLowerCase()
@@ -109,7 +109,7 @@ export function CreateRecipe() {
         <div className="create_container">
             <img className="imgCreate" src={imageCreate} alt="" />
             <h1 className="title">¡Cook your recipe!</h1>
-            <h1 className="title2">¡Share your recipes!</h1>
+
             <form className="form" onSubmit={handleSubmit}>
                 <div className="BTNS">
                     <button className="btn-create" type="submit">
@@ -237,13 +237,14 @@ export function CreateRecipe() {
                             {input.diets?.map((el) => (
                                 <p className="nameDiet">
                                     {el}
-                                    <button className="btnDelete" onClick={(e) => handleDeleteDiet(el)}>x</button>
+                                    <button type="button" className="btnDelete" onClick={(e) => handleDeleteDiet(el)}>Del</button>
                                 </p>
                             ))}
                         </h5>
                     </div>
 
                 </div>
+
 
             </form>
             <div>

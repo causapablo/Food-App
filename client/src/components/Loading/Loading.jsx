@@ -4,7 +4,9 @@ import "./Loading.css";
 export function Loading() {
     return (
         <div class="loader-container">
-            <img class="loading-img" src={LoadingRecipe} alt="loaging" />
+            <div className="progress">
+                <div className="color"></div>
+            </div>
         </div>
     );
 }

@@ -9,8 +9,7 @@ import {
 import "./Aside.css";
 
 export function Aside() {
-    const [, setOrder] = useState("");
-    const [, setDiets] = useState("allRecipes");
+
 
     const dispatch = useDispatch();
     const totalDiets = useSelector((state) => state.diets);
@@ -26,25 +25,24 @@ export function Aside() {
     }
 
 
-    //Filtro por los Typos:
+    //Filtro por los Diets:
     function handleFilterByDiets(e) {
         e.preventDefault();
         dispatch(filterByDiets(e.target.value));
-        setDiets(e.target.value);
+
     }
 
     //Orden alfebetico:
     function handleFilterName(e) {
         e.preventDefault();
         dispatch(orderByName(e.target.value));
-        setOrder(`Order by ${e.target.value}`);
+
     }
 
     //Orden por Score:
     function handleOrderByScore(e) {
         e.preventDefault();
         dispatch(orderByScore(e.target.value));
-        setOrder(`Order by ${e.target.value}`);
     }
 
     return (

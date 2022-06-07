@@ -77,7 +77,7 @@ const rootReducer = (state = initialState,action)=>{
         case RESET_DETAIL:
             return {
                 ...state,
-                detail: {},
+                recipeDetail: {},
             };
         case ORDER_BY_SCORE : {
             const sortedRecipesScore = action.payload === "Asc" ?

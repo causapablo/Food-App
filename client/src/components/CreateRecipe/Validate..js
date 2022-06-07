@@ -21,8 +21,6 @@ export function validate (input){
         errors.image = 'Please insert an image type URL'
     }else if(!input.analyzedInstructions){
         errors.analyzedInstructions = "required field"
-    }else if(input.diets.length === 0){
-        errors.diet = "it has to be a different diet"
     }
 
     return errors;

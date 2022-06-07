@@ -20,22 +20,3 @@
     font-weight: bolder;
 }
 
-@keyframes flash {
-    20%,
-    40%,
-    60%,
-    80%,
-    90%,
-    100% {
-        text-shadow: -0.2rem -0.2rem 1rem rgb(0, 255, 42), 0.2rem 0.2rem 1rem #FEF9A7,
-        0 0 2rem var(--neon-text-color), 0 0 4rem var(--neon-text-color),
-        0 0 6rem var(--neon-text-color), 0 0 8rem var(--neon-text-color),
-        0 0 10rem var(--neon-text-color);
-    }
-
-    5%,
-    10%,
-    15% {
-        text-shadow: none;
-    }
-}

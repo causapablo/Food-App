@@ -1,36 +1,39 @@
 import React from "react";
-import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { NavBar } from "../NavBar/NavBar";
-import { Footer } from "../Footer/Footer";
+import {useEffect} from "react";
+import {Link, useParams} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {NavBar} from "../NavBar/NavBar";
+import {Footer} from "../Footer/Footer";
 import {Loading as Loader} from '../Loading/Loading'
-import  imgDetails from "../../assets/DetailBackground.jpg"
-import { getRecipeDetail } from "../../redux/actions/actionsCreators";
+import imgDetails from "../../assets/DetailBackground.jpg"
+import {getRecipeDetail, resetDetail} from "../../redux/actions/actionsCreators";
 import "./RecipeDetail.css";
 
 export function RecipeDetail() {
     const dispatch = useDispatch();
     const {id} = useParams(); //Para obtener el ID por Params
     const oneRecipe = useSelector((state) => state.recipeDetail);
-    const charging = useSelector(state=> state.loading);
-
+    function reset(){
+        dispatch(resetDetail());
+    }
     useEffect(() => {
         dispatch(getRecipeDetail(id));
 
     }, [dispatch, id]);
     console.log("recipeDetail");
-    return (
-        <div>
-            {
-                charging ?
-                    (<div >
-                                     <NavBar/>
-                                     <div>
-                                         <Loader />
-                                     </div>
-                                 </div>
-                    ) :
+    if (!oneRecipe.title) {
+        return (
+            <div>
+                <NavBar/>
+                <div>
+                    <Loader/>
+                </div>
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                {
                     <div>
                         <img className="imgDetails" src={imgDetails} alt="imgDetail"/>
                         <div className="background">
@@ -48,23 +51,26 @@ export function RecipeDetail() {
 
                                 <div className="description">
                                     <div className="diets">
-                                        <p>Diet types:</p>
+                                        <p className="label">Diet types: </p>
                                         <div className="diet">{oneRecipe.diets ? oneRecipe.diets.map((d, index) => <p
                                             key={index}> - {d.name}</p>) : 'Loading'}</div>
                                     </div>
                                     <div className="score">
-                                        <p>{`Health Score: ${oneRecipe.healthScore}`}</p>
+                                        <p className="label">Health Score: </p>
+                                        <p>{`${oneRecipe.healthScore}`}</p>
                                     </div>
                                     <div className="summary">
-                                        <p>{`Summary: ${oneRecipe.summary}`}</p>
+                                        <p className="label">Summary: </p>
+                                        <p>{`${oneRecipe.summary}`}</p>
                                     </div>
                                     <div className="instructions">
-                                        <p>{`Instructions : ${oneRecipe.analyzedInstructions ? oneRecipe.analyzedInstructions : "No instructions avaiable"}`}</p>
+                                        <p className="label">Instructions: </p>
+                                        <p>{` ${oneRecipe.analyzedInstructions ? oneRecipe.analyzedInstructions : "No instructions avaiable"}`}</p>
                                     </div>
                                 </div>
                             </div>
                             <div className="buttonss">
-                                <button className="button-home">
+                                <button className="button-home" onClick={()=>reset} >
                                     <Link to="/recipes/" class="linked">
                                         Back
                                     </Link>
@@ -74,13 +80,15 @@ export function RecipeDetail() {
                         </div>
                         <Footer/>
                     </div>
-            }
-        </div>
+                }
+            </div>
 
-    )
+        )
+    }
+
 
 }
-
+window.scrollTo(0, 0);
 
 // import React, {useEffect} from 'react';
 // import {useDispatch, useSelector} from "react-redux";

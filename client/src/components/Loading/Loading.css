@@ -6,10 +6,35 @@
     min-height: 100vh;
 }
 
-.loading-img{
-    width: 380px;
-    height: 380px;
-    padding-bottom: 100px;
-    padding-right: -50px;
-    margin: auto;
+.progress{
+    position: relative;
+    height: 10px;
+    width: 1110%;
+    border: 10px solid #f4a261;
+    border-radius: 15px;
+}
+.progress .color{
+    position: absolute;
+    background-color: #FF5B00;
+    width: 0px;
+    height: 10px;
+    border-radius: 15px;
+    animation: progres 4s infinite linear;
+}
+@keyframes progres{
+    0%{
+        width: 0%;
+    }
+    25%{
+        width: 50%;
+    }
+    50%{
+        width: 75%;
+    }
+    75%{
+        width: 85%;
+    }
+    100%{
+        width: 100%;
+    }
 }

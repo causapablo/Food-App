@@ -2,7 +2,7 @@ import { NavBar } from "../NavBar/NavBar";
 import { AllRecipes } from "../AllRecipes/AllRecipes.jsx";
 import { Footer } from "../Footer/Footer";
 import { Aside as Filter } from "../Aside/Aside";
-import imgLanding from "../../assets/Background.jpg";
+import imgLanding from "../../assets/HomeBackground.jpg";
 
 
 export default function Home() {

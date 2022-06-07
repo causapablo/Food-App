@@ -5,7 +5,6 @@ import Home from "./components/Home/Home";
 import {RecipeDetail} from "./components/RecipeDetail/RecipeDetail";
 import {CreateRecipe} from "./components/CreateRecipe/CreateRecipe";
 import {LandingPage} from "./components/LandingPage/LandingPage";
-import {ErrorPage} from "./components/ErrorPage/ErrorPage";
 
 function App() {
     return (
@@ -14,7 +13,7 @@ function App() {
            <Route exact path={'/recipes'} component={Home}/>
            <Route exact path={'/recipe/:id'} component={RecipeDetail}/>
            <Route exact path={'/create'} component={CreateRecipe}/>
-           <Route exact path={"/error"} component={ErrorPage}/>
+
        </main>
     );
 }
