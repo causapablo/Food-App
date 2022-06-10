@@ -4,7 +4,7 @@ const {Router} = require('express');
 
 
 const recipeController = require('../controllers/recipe/recipeController');
-const typeController = require('../controllers/diet/dietsController')
+const dietsController = require('../controllers/diet/dietsController')
 
 
 const router = Router();
@@ -14,7 +14,7 @@ const router = Router();
 
 router.get('/recipes',recipeController.getElements);
 router.get('/recipes/:id',recipeController.getElementById);
-router.get('/diets',typeController.getElements);
+router.get('/diets',dietsController.getElements);
 router.post('/recipes', recipeController.postElement);
-// router.post('/recipes/:idRecipe/diet/:idDiet',recipeController.addDietToRecipe);
+
 module.exports = router;

@@ -9,10 +9,10 @@ const toObject = (data) => {
                 servings: item.servings,
                 image: item.image,
                 summary: item.summary.replace(/<[^>]+>/g, ""),
-                diets: item.diets.map(d=>{
+                diets: item.diets.map(d=>{//['vegan','keto', freegluten']
                     return {
                         name: d
-                    }
+                    }//[{name: vegan}, {name: keto}, {name: freegluten}];
                 }),
                 healthScore: item.healthScore,
                 analyzedInstructions: item.analyzedInstructions[0]?.steps.map(s => s.step).join(" "),

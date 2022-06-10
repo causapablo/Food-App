@@ -13,7 +13,7 @@ class RecipeController extends ModelController {
         super(model);
     }
 
-    getElements = (req, res, next) => {
+    getElements = (req, res) => {
         let {title} = req.query;
         try {
             if (title) {

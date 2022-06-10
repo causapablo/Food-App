@@ -19,10 +19,10 @@ export function AllRecipes() {
     let cache = useSelector(state=>state.cacheFiltrado);
 
     const [counterPage, setCounterPage] = useState(1);
-    const [recipesPerPage ] = useState(9);
+    const recipesPerPage = 9;
 
     const lastRecipe = counterPage * recipesPerPage; // 1 * 9 = 9
-    const firstRecipe = lastRecipe - recipesPerPage; // 12 - 12 = 0
+    const firstRecipe = lastRecipe - recipesPerPage; // 9 - 9 = 0
     //Indicador:
     const indexPages = Math.ceil(allRecipes.length / recipesPerPage);
 

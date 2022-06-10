@@ -227,7 +227,8 @@ export function CreateRecipe() {
                                 name="diets"
                                 className="Dit"
                                 onChange={handleDietsChange}
-                            >
+                                defaultValue="All diets"
+                            >   <option>All diets</option>
                                 {diets.map((e,index) => (
                                     <option key={index} value={e.name}>{e.name}</option>
                                 ))}
