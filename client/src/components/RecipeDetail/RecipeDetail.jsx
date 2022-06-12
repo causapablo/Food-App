@@ -13,11 +13,13 @@ export function RecipeDetail() {
     const dispatch = useDispatch();
     const {id} = useParams(); //Para obtener el ID por Params
     const oneRecipe = useSelector((state) => state.recipeDetail);
+    //Estado Local, con un useState...
     function reset(){
         dispatch(resetDetail());
     }
     useEffect(() => {
         dispatch(getRecipeDetail(id));
+        //actualizado Estado...
 
     }, [dispatch, id]);
     console.log("recipeDetail");

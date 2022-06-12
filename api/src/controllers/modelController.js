@@ -54,6 +54,7 @@ class ModelController {
             res.status(400).send("Error en alguno de los datos provistos")
         }
     };
+    
 }
 module.exports = ModelController;
 

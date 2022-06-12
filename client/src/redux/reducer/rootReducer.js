@@ -104,7 +104,9 @@ const rootReducer = (state = initialState,action)=>{
         case CREATE_RECIPE : {
             return{
                 ...state,
-                recipes: [...state.recipes, action.payload]
+                recipes: [...state.recipes, action.payload],
+                cacheFiltrado: "allDiets"
+
             }
         }
         case GET_RECIPE_DETAIL : {

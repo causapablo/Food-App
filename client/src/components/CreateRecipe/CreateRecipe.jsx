@@ -73,7 +73,10 @@ export function CreateRecipe() {
                 return alert("There's already one recipe with that title, please, change it. Danke schön.");
             } else if (Object.keys(errors).length) {
                 return alert(Object.values(errors));
-            } else {
+            } else if(!input.title && !input.summary && !input.healthScore && !input.analyzedInstructions && !input.image && input.diets.length===0){
+                return alert("Debe ingresar los campos requeridos");
+            }
+            else{
                 const newRecipe = {
                     title: input.title,
                     summary: input.summary,

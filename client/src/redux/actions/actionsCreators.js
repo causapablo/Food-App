@@ -67,13 +67,10 @@ export const orderByScore = (payload) => {
 };
 export const searchByTitle = (title) => {
 
-    return async (dispatch) => {
-        try {
-            let recipesByTitle = await axios.get(`http://localhost:3001/recipes?title=${title}`);
-            return dispatch({type: SEARCH_BY_TITLE, payload: recipesByTitle.data});
-        } catch (e) {
-            console.log(e);
-        }
+    return (dispatch) => {
+            axios.get(`http://localhost:3001/recipes?title=${title}`)
+                .then(recipesByTitle=>dispatch({type: SEARCH_BY_TITLE, payload: recipesByTitle.data}))
+                .catch(error=>console.log(error));
     };
 };
 export const createRecipe = (recipe) => {
