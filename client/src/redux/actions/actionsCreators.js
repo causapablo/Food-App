@@ -17,7 +17,7 @@ export const getAllRecipes = () => {
     return async (dispatch) => {
         try {
             dispatch(loading());
-            let recipes = await axios('http://localhost:3001/recipes');
+            let recipes = await axios('/recipes');
             return dispatch({
                 type: GET_ALL_RECIPES,
                 payload: recipes.data
@@ -31,7 +31,7 @@ export const getAllDiets = () => {
     return async (dispatch) => {
         try {
 
-            let diets = await axios('http://localhost:3001/diets');
+            let diets = await axios('/diets');
             return dispatch({
                 type: GET_ALL_DIETS,
                 payload: diets.data
@@ -68,7 +68,7 @@ export const orderByScore = (payload) => {
 export const searchByTitle = (title) => {
 
     return (dispatch) => {
-            axios.get(`http://localhost:3001/recipes?title=${title}`)
+            axios.get(`/recipes?title=${title}`)
                 .then(recipesByTitle=>dispatch({type: SEARCH_BY_TITLE, payload: recipesByTitle.data}))
                 .catch(error=>console.log(error));
     };
@@ -76,7 +76,7 @@ export const searchByTitle = (title) => {
 export const createRecipe = (recipe) => {
     return async (dispatch) => {
         try {
-            let newRecipe = await axios.post('http://localhost:3001/recipes', recipe);
+            let newRecipe = await axios.post('/recipes', recipe);
             return dispatch({type: CREATE_RECIPE, payload: newRecipe.data})
         } catch (e) {
             console.log(e);
@@ -89,7 +89,7 @@ export const getRecipeDetail = (id) => {
 
         try {
             dispatch(loading());
-            let recipe = await axios.get(`http://localhost:3001/recipes/${id}`);
+            let recipe = await axios.get(`/recipes/${id}`);
             return dispatch({type: GET_RECIPE_DETAIL, payload: recipe.data})
         } catch (e) {
             console.log(e);
